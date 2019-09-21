@@ -94,7 +94,7 @@ public class PIDTalonSRX {
         return motor.getMotorOutputPercent();
     }
 
-    public void setSpeed(int position){
+    public void setPostion(int position){
         motor.set(ControlMode.Position, getSelectedSensorPosition() - position);
     }
 }

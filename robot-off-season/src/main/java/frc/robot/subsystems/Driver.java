@@ -13,7 +13,7 @@ public class Driver extends Subsystem{
     public Driver() {
         boolean isMotorInverted = true;
         leftGearBox = new GearBox(new VictorSP(0), new VictorSP(1));
-        rightGearBox = new GearBox(new VictorSP(0), new VictorSP(1), isMotorInverted, isMotorInverted);
+        rightGearBox = new GearBox(new VictorSP(2), new VictorSP(3), isMotorInverted, isMotorInverted);
 
         navx = new SmartNavx();
     }
