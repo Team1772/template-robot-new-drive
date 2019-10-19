@@ -1,14 +1,14 @@
-package frc.robot.autons.groups;
+package frc.robot.autons.commands.groups;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Steps extends CommandGroup {
+public class CommandTypes extends CommandGroup {
 	private Timer timer;
 
-	public Steps(Subsystem subsys) {
+	public CommandTypes(Subsystem subsys) {
 		timer = new Timer();
 
 		requires(subsys);
@@ -28,16 +28,16 @@ public class Steps extends CommandGroup {
 	}
 
 	/* COMMAND BASED AUTONOMOUS */
-	public void addStep(IStep step) {
+	public void addStep(ICommandTypes step) {
 		super.addSequential(this.toCommand(step));
 	}
-	public void addStep(IStep step, double timeOut) {
+	public void addStep(ICommandTypes step, double timeOut) {
 		super.addSequential(this.toCommand(step), timeOut);
 	}
-	public void addParallelStep(IStep step) {
+	public void addParallelStep(ICommandTypes step) {
 		super.addParallel(this.toCommand(step));
 	}
-	public void addParallelStep(IStep step, double timeOut) {
+	public void addParallelStep(ICommandTypes step, double timeOut) {
 		super.addParallel(this.toCommand(step), timeOut);
 	}
 	public void addStep(Command step) {
@@ -53,7 +53,7 @@ public class Steps extends CommandGroup {
 		super.addParallel(step, timeOut);
 	}
 
-	private Command toCommand(IStep step) {
+	private Command toCommand(ICommandTypes step) {
 		return new Command() {
 			@Override
 			protected boolean isFinished() {
