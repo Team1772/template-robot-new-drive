@@ -28,36 +28,36 @@ public class CommandTypes extends CommandGroup {
 	}
 
 	/* COMMAND BASED AUTONOMOUS */
-	public void addStep(ICommandTypes step) {
-		super.addSequential(this.toCommand(step));
+	public void addStep(ICommandTypes command) {
+		super.addSequential(this.toCommand(command));
 	}
-	public void addStep(ICommandTypes step, double timeOut) {
-		super.addSequential(this.toCommand(step), timeOut);
+	public void addStep(ICommandTypes command, double timeOut) {
+		super.addSequential(this.toCommand(command), timeOut);
 	}
-	public void addParallelStep(ICommandTypes step) {
-		super.addParallel(this.toCommand(step));
+	public void addParallelStep(ICommandTypes command) {
+		super.addParallel(this.toCommand(command));
 	}
-	public void addParallelStep(ICommandTypes step, double timeOut) {
-		super.addParallel(this.toCommand(step), timeOut);
+	public void addParallelStep(ICommandTypes command, double timeOut) {
+		super.addParallel(this.toCommand(command), timeOut);
 	}
-	public void addStep(Command step) {
-		super.addSequential(step);
+	public void addStep(Command command) {
+		super.addSequential(command);
 	}
-	public void addStep(Command step, double timeOut) {
-		super.addSequential(step, timeOut);
+	public void addStep(Command command, double timeOut) {
+		super.addSequential(command, timeOut);
 	}
-	public void addParallelStep(Command step) {
-		super.addParallel(step);
+	public void addParallelStep(Command command) {
+		super.addParallel(command);
 	}
-	public void addParallelStep(Command step, double timeOut) {
-		super.addParallel(step, timeOut);
+	public void addParallelStep(Command command, double timeOut) {
+		super.addParallel(command, timeOut);
 	}
 
-	private Command toCommand(ICommandTypes step) {
+	private Command toCommand(ICommandTypes command) {
 		return new Command() {
 			@Override
 			protected boolean isFinished() {
-				return step.run();
+				return command.run();
 			}
 		};
 	}
