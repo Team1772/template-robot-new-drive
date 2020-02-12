@@ -1,17 +1,19 @@
 package frc.core.components;
 
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class SmartSolenoid {
-    private Solenoid solenoidIn, solenoidOut;
+    private DoubleSolenoid solenoid;
 
-    public SmartSolenoid(int channelIn, int channelOut){
-        solenoidIn = new Solenoid(channelIn);
-        solenoidOut = new Solenoid(channelOut);
+    public SmartSolenoid(int channelOne, int channelTwo){
+        this.solenoid = new DoubleSolenoid(channelOne, channelTwo);
     }
 
-    public void set(boolean push){
-        solenoidIn.set(push);
-        solenoidOut.set(!push);
+    public void enable() {
+        solenoid.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void disable() {
+        solenoid.set(DoubleSolenoid.Value.kReverse); 
     }
 }
