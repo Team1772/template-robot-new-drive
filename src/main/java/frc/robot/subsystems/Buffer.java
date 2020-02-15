@@ -24,6 +24,10 @@ public class Buffer extends Subsystem{
         bufferMotor.set(SimpleDashboard.getInstance().getNumber("BUFFER_SPEED", -1 * 1));
     }
 
+    public boolean isPowerCellCollected() {
+        return bufferSensor.get();
+    }
+
     public void stop() {
         bufferMotor.set(0);
     }

@@ -19,6 +19,10 @@ public class GearBox extends SpeedControllerGroup{
         this(motors, null, 0);
     }
 
+    public double getMeasurement(){
+        return encoder.getRate();
+    }
+
     private void configureEncoder(double distancePerPulse){
         encoder.setDistancePerPulse(distancePerPulse);
     }
