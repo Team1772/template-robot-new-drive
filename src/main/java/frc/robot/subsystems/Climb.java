@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -9,7 +10,7 @@ import frc.core.util.SimpleDashboard;
 
 public class Climb extends Subsystem{
 
-    private SmartSolenoid angleClimb;
+    private Solenoid angleClimb;
     private VictorSP climbMotorOne;
     private VictorSP climbMotorTwo;
     private Spark elevatorClimb;
@@ -19,12 +20,17 @@ public class Climb extends Subsystem{
        climbMotorTwo = new VictorSP(Ports.climbMotorTwo);
        elevatorClimb = new Spark(Ports.elevatorClimb);
        
-       angleClimb = new SmartSolenoid(Ports.angleClimbOne, Ports.angleClimbTwo);
+       angleClimb = new Solenoid(Ports.angleClimb);
     }
 
-    public void rollUp() {
-        climbMotorOne.set(SimpleDashboard.getInstance().getNumber("CLIMB_UP_ONE", 1));
-        climbMotorTwo.set(SimpleDashboard.getInstance().getNumber("CLIMB_UP_TWO", 1));
+    // public void rollUp() {
+    //     climbMotorOne.set(SimpleDashboard.getInstance().getNumber("CLIMB_UP_ONE", 1));
+    //     climbMotorTwo.set(SimpleDashboard.getInstance().getNumber("CLIMB_UP_TWO", 1));
+    // }
+
+    public void rollUpDown(double speed) {
+        climbMotorOne.set(speed);
+        climbMotorTwo.set(speed);
     }
 
     public void stop() { 
@@ -37,16 +43,20 @@ public class Climb extends Subsystem{
         elevatorClimb.set(1);
     }
 
+    public void upDown(double speed) {
+        elevatorClimb.set(speed);
+    }
+
     public void down() {
         elevatorClimb.set(-1);
     }
 
     public void enableAngleClimb() {
-        angleClimb.enable(); 
+        angleClimb.set(true); 
     }
 
     public void disableAngleClimb() {
-        angleClimb.disable(); 
+        angleClimb.set(false); 
     }
 
     @Override

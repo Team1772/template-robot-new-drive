@@ -17,17 +17,17 @@ public class Robot extends TimedRobot {
   public static Shooter shooter;
   public static Intake intake;
   public static Climb climb;
-  // public static Buffer buffer;
+  public static Buffer buffer;
 
   @Override
   public void robotInit() {
-    // compressor = new Compressor();
+    compressor = new Compressor();
     
     driver = new Driver();
     shooter = new Shooter();
-    // intake = new Intake();
-    // climb = new Climb();
-    // buffer = new Buffer();
+    intake = new Intake();
+    climb = new Climb();
+    buffer = new Buffer();
     
     Auton.INSTANCE.init();
   }

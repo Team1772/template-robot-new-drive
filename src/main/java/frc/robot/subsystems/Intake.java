@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.core.components.SmartSolenoid;
@@ -9,11 +10,11 @@ import frc.core.util.Ports;
 public class Intake extends Subsystem{
 
     private VictorSP motorIntake;
-    private SmartSolenoid activatorIntake;
+    private Solenoid activatorIntake;
 
     public Intake() {
        motorIntake = new VictorSP(Ports.motorIntake);
-       activatorIntake = new SmartSolenoid(Ports.activatorIntakeOne, Ports.activatorIntakeTwo);
+       activatorIntake = new Solenoid(Ports.activatorIntakeOne);
     }
 
     public void pull() {
@@ -29,11 +30,11 @@ public class Intake extends Subsystem{
     }
 
     public void enableIntake() {
-        activatorIntake.enable(); 
+        activatorIntake.set(true); 
     }
 
     public void disableIntake() {
-        activatorIntake.disable(); 
+        activatorIntake.set(false); 
     }
 
     @Override

@@ -57,7 +57,8 @@ public class PIDTalonSRXVelocity {
     }
 
     public void setPower(double power) {
-        double targetVelocity = power * 500.0 * 4096 / 600;
+        // double targetVelocity = power * 500.0 * 4096 / 600;
+        double targetVelocity = 5250;
 
         motor.set(ControlMode.Velocity, targetVelocity);
     }

@@ -13,7 +13,7 @@ public class Buffer extends Subsystem{
 
     public Buffer() {
        bufferMotor = new VictorSP(Ports.bufferMotor);
-       bufferSensor = new DigitalInput(Ports.bufferSensor);
+    //    bufferSensor = new DigitalInput(Ports.bufferSensor);
     }
 
     public void pull() {

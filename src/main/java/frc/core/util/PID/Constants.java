@@ -34,12 +34,12 @@ public class Constants {
 
     
     public static final Gains kGains = new Gains(
-        SimpleDashboard.getInstance().getNumber("kP", 0), 
+        SimpleDashboard.getInstance().getNumber("kP", 0.0001), 
         SimpleDashboard.getInstance().getNumber("kI",0),
-        SimpleDashboard.getInstance().getNumber("kD", 10), 
-        SimpleDashboard.getInstance().getNumber("kF", 1023.0/7200.0),
+        SimpleDashboard.getInstance().getNumber("kD", 5), 
+        SimpleDashboard.getInstance().getNumber("kF", 0.25),
         SimpleDashboard.getInstance().getDeviceID("kIzone", 300), 
-        SimpleDashboard.getInstance().getNumber("kPeakOutput", 1.00)
+        SimpleDashboard.getInstance().getNumber("kPeakOutput", 1)
     );
     static final Gains kGainsTwo = new Gains(0.6, 0.0, 6.0, 0.0, 0, 1.0);
 

@@ -11,42 +11,37 @@ public enum Teleop{
 
     public void init() {
         driver = new XboxController(Ports.driverJoystick);
-        // operator = new XboxController(Ports.operatorJoystick);
+        operator = new XboxController(Ports.operatorJoystick);
     }
 
     public void periodic() {
         Robot.driver.arcadeDrive(driver.getAxisLeftY(), driver.getAxisRightX());
 
-        // if (operator.getButtonL1()) {
-        //     Robot.intake.enableIntake();
-        //     // Robot.buffer.pull();
-        //     Robot.intake.pull();
-        // } else {
-        //     Robot.intake.disableIntake();
-        //     Robot.intake.stop();
-        //     // Robot.buffer.stop();
-        // }
+        if (operator.getButtonL1()) {
+            Robot.intake.enableIntake();
+            Robot.intake.pull();
+        } else {
+            Robot.intake.disableIntake();
+            Robot.intake.stop();
+        }
 
         if (driver.getButtonR1()) {
-            // Robot.buffer.push();
             Robot.shooter.push();
-            Robot.shooter.getSensorVelocity();
         } else {
-            // Robot.buffer.stop();
             Robot.shooter.stop();
         }
 
+        if(operator.getButtonY())
+            Robot.climb.enableAngleClimb();
 
-        // if (operator.getButtonX()) Robot.shooter.enableAngle();
-        // else Robot.shooter.disableAngle();
+
+
+        if (operator.getButtonX()) Robot.shooter.enableAngle();
+        else Robot.shooter.disableAngle();
         
-        // if (operator.getButtonY()) { 
-        //     Robot.climb.rollUp();
-        //     Robot.climb.enableAngleClimb();
-        //     Robot.climb.up();
-        // } else {
-        //     Robot.climb.stop();
-        //     Robot.climb.disableAngleClimb();
-        // } 
+            Robot.climb.upDown(operator.getAxisLeftY());
+       
+
+        // Robot.climb.rollUpDown(operator.getButtonR2());
     }
 }
