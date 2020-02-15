@@ -2,7 +2,7 @@ package frc.core.util.PID;
 
 import frc.core.util.SimpleDashboard;
 
-public class Constants {
+public class Constants {DriveConstants
 	
     public static final int kSlotIdxOne = 0;
     public static final int kSlotIdxTwo = 0;
@@ -32,6 +32,18 @@ public class Constants {
     public static int peakOutputForwardValue = 1;
     public static int peakOutputReverseValue = -1;
 
+    public static double kDriveStraightP = 0;
+    public static double kDriveStraightI = 0;
+    public static double kDriveStraightD = 0;
+
+    public static double kTurnToAngleP = 0;
+    public static double kTurnToAngleI = 0;
+    public static double kTurnToAngleD = 0;
+
+    public static final double kTurnToleranceDeg = 5;
+    public static final double kTurnRateToleranceDegPerS = 10; // degrees per second
+
+    public static double driveStraightTolerance = 0.01;
     
     public static final Gains kGains = new Gains(
         SimpleDashboard.getInstance().getNumber("kP", 0), 
