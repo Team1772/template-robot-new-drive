@@ -2,7 +2,7 @@ package frc.core.util.PID;
 
 import frc.core.util.SimpleDashboard;
 
-public class Constants {DriveConstants
+public class Constants {
 	
     public static final int kSlotIdxOne = 0;
     public static final int kSlotIdxTwo = 0;
