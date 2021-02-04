@@ -4,11 +4,8 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.core.components.SmartSolenoid;
 import frc.core.util.Ports;
-import frc.core.util.SimpleDashboard;
-
-public class Climb extends Subsystem{
+public class Climb extends Subsystem {
 
     private Solenoid angleClimb;
     private VictorSP climbMotorOne;
@@ -22,20 +19,28 @@ public class Climb extends Subsystem{
        
        angleClimb = new Solenoid(Ports.angleClimb);
     }
-
-    // public void rollUp() {
-    //     climbMotorOne.set(SimpleDashboard.getInstance().getNumber("CLIMB_UP_ONE", 1));
-    //     climbMotorTwo.set(SimpleDashboard.getInstance().getNumber("CLIMB_UP_TWO", 1));
-    // }
-
+    
     public void rollUpDown(double speed) {
         climbMotorOne.set(speed);
         climbMotorTwo.set(speed);
     }
 
-    public void stop() { 
+    public void rollUp(double speed){
+        climbMotorOne.set(speed);
+        climbMotorTwo.set(speed);
+    }
+
+    public void rollDown(double speed){
+        climbMotorOne.set(-speed);
+        climbMotorTwo.set(-speed);
+    }
+
+    public void rollStop(){
         climbMotorOne.set(0);
         climbMotorTwo.set(0);
+    }
+
+    public void stop() { 
         elevatorClimb.set(0);
     }
 
@@ -44,7 +49,7 @@ public class Climb extends Subsystem{
     }
 
     public void upDown(double speed) {
-        elevatorClimb.set(speed);
+        elevatorClimb.set(-speed);
     }
 
     public void down() {
@@ -60,6 +65,5 @@ public class Climb extends Subsystem{
     }
 
     @Override
-    protected void initDefaultCommand() {
-    }
+    protected void initDefaultCommand() { }
 }

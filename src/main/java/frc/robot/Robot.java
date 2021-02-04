@@ -44,7 +44,6 @@ public class Robot extends TimedRobot {
   
   @Override
   public void teleopInit() {
-    Auton.INSTANCE.cancel();
     Teleop.INSTANCE.init();
   }
   
@@ -53,9 +52,16 @@ public class Robot extends TimedRobot {
     Teleop.INSTANCE.periodic();
   }
   
-
   @Override
   public void testPeriodic() {
   }
+  
+  @Override 
+  public void disabledInit() {
+  }
 
+  @Override
+  public void disabledPeriodic() {
+    driver.reset();
+  }
 }

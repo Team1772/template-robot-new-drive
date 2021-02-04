@@ -4,7 +4,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.core.util.SimpleDashboard;
 
 public class PIDTalonSRXVelocity {
@@ -57,16 +56,14 @@ public class PIDTalonSRXVelocity {
     }
 
     public void setPower(double power) {
-        // double targetVelocity = power * 500.0 * 4096 / 600;
-        double targetVelocity = 5250;
-
-        motor.set(ControlMode.Velocity, targetVelocity);
+        motor.set(ControlMode.Velocity, power);
     }
 
     
-    public void getSensorVelocity(){
-       SimpleDashboard.getInstance().getNumber("PID VALUE",
-        motor.getSelectedSensorVelocity(Constants.kPIDLoopIdx) * 1.0);
+    public int getSensorVelocity(){
+        SimpleDashboard.getInstance().getNumber("MOTOR VELOCITY", motor.getSelectedSensorVelocity());
+        
+        return motor.getSelectedSensorVelocity();
     }
 
     public void stop(){

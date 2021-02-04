@@ -1,20 +1,34 @@
 package frc.robot.autons.commands;
-
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class PushPowerCell extends Command {
-  public PushPowerCell() {
-      Robot.shooter.push();
-      Robot.buffer.push();
+  private Timer timer;
+  public PushPowerCell(){
+    timer = new Timer();
   }
 
   @Override
-  public boolean isFinished() {
-    int count = 0;
-    if(Robot.buffer.isPowerCellCollected())
-        count += 1;
+  protected void initialize() {
+    Robot.driver.stop();
+    Robot.shooter.enableAngle();
+    timer.start();
+  }
 
-    return count > 3;
+  @Override
+  protected boolean isFinished() {
+    Robot.shooter.pushAuton();
+
+    if (timer.get() > 1.6) 
+      Robot.buffer.pull();
+
+    return isTimedOut(); 
+  }
+
+  @Override
+  protected void end() {
+    Robot.buffer.stop();
+    Robot.shooter.stop();
   }
 }

@@ -1,28 +1,30 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.core.components.SmartSolenoid;
-import frc.core.util.SimpleDashboard;
 import frc.core.util.Ports;
 
 public class Intake extends Subsystem{
 
     private VictorSP motorIntake;
-    private Solenoid activatorIntake;
+    private SmartSolenoid activatorIntake;
 
     public Intake() {
        motorIntake = new VictorSP(Ports.motorIntake);
-       activatorIntake = new Solenoid(Ports.activatorIntakeOne);
+       activatorIntake = new SmartSolenoid(Ports.activatorIntakeOne, Ports.activatorIntakeTwo);
     }
 
     public void pull() {
-        motorIntake.set(SimpleDashboard.getInstance().getNumber("INTAKE_SPEED", 1));
+        motorIntake.set(-1);
+    }
+
+    public void pullPush(double speed) {
+        motorIntake.set(speed);
     }
 
     public void push() {
-        motorIntake.set(SimpleDashboard.getInstance().getNumber("INTAKE_SPEED", -1 * 1));
+        motorIntake.set(1);
     }
 
     public void stop() {
@@ -30,14 +32,13 @@ public class Intake extends Subsystem{
     }
 
     public void enableIntake() {
-        activatorIntake.set(true); 
+        activatorIntake.enable(); 
     }
 
     public void disableIntake() {
-        activatorIntake.set(false); 
+        activatorIntake.disable(); 
     }
 
     @Override
-    protected void initDefaultCommand() {
-    }
+    protected void initDefaultCommand() { }
 }

@@ -1,45 +1,49 @@
 package frc.robot.routines;
 
-import java.util.ArrayList;
-
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.autons.AutoLine;
+import frc.robot.autons.TrenchRun;
 
 public enum Auton {
     INSTANCE;
 
-    private ArrayList<Command> autons;
-    private Command autonCommand;
+    private Command autoSelected;
+    private SendableChooser<Command> chooser;
 
-    public void init(){
-        autons = new ArrayList<>();
+    public void init() {
+        this.chooser = new SendableChooser<>();
+        this.chooser.setDefaultOption("Auto Line", new AutoLine());
+        this.chooser.addOption("Trench Run", new TrenchRun());
 
-        /*Add autons like this:
-        autons.add(new CenterGear());
-        */
+        SmartDashboard.putData("SELECT AUTONS", this.chooser);
     }
 
-    public void periodic(){
+    public void periodic() {
         Scheduler.getInstance().run();
     }
+    
+    public void start() {
+        this.autoSelected = this.getAutonSelected();
 
-    public void start(){
-        autonCommand = getAutonSelected();
-
-        if(autonCommand != null)
-            autonCommand.start();
+        if (this.autoSelected != null) {
+    		System.out.println("AUTONOMOUS START :" + autoSelected.getName());
+    		SmartDashboard.putString("Autonomos selected:", autoSelected.getName());
+    		autoSelected.start();
+    	}
     }
 
-    public void cancel(){
-        if(autonCommand != null)
-            autonCommand.cancel();
+    private Command getAutonSelected() {
+        return this.chooser.getSelected();
+    } 
+
+    public void cancel() {
+    	if (this.autoSelected != null) {
+    		System.out.println("AUTONOMOUS END :" + autoSelected.getName());
+    		SmartDashboard.putString("Autonomos selected:", autoSelected.getName());
+    		autoSelected.cancel();
+    	}
     }
-
-    private Command getAutonSelected(){
-        int number = (int)SmartDashboard.getNumber("Auto mode", 0);
-
-        return autons.size() > number ? autons.get(number) : autons.get(0);
-    }
-
 }

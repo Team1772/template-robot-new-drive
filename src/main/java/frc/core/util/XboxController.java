@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 
 public class XboxController extends Joystick{
 
-    public XboxController(int port){
+    public XboxController(final int port) {
         super(port);
     }
 
@@ -71,4 +71,21 @@ public class XboxController extends Joystick{
 	public boolean getButtonSelect() {
 		return this.getRawButton(7);
 	}
+
+	public static enum Direction {
+        UP(0), RIGHT(90), DOWN(180), LEFT(270);
+
+        int direction;
+
+        private Direction(int direction) {
+            this.direction = direction;
+		}
+	}
+
+	public boolean getGamePad(Direction direction) {
+        int dPadValue = this.getPOV();
+        return (dPadValue == direction.direction) || (dPadValue == (direction.direction + 45) % 360)
+                || (dPadValue == (direction.direction + 315) % 360);
+    }
+
 }
